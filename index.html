@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WalkWalkDog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="personagem">
+        <img id="parado_esquerda" src="imagens/LuEBrauIdleLeft.png">
+        <img id="parado_direita" src="imagens/LuEBrauIdleRight.png">
+        <img id="andando_esquerda" src="imagens/LuEBrauWalkLeft.gif">
+        <img id="andando_direita" src="imagens/LuEBrauWalkRight.gif">
+    </div>
+    <!-- Adicione a div da janela de batalha -->
+    <div id="battleWindow">
+        <div id="characterSprites">
+            <img class="character-img" src="imagens/LuEBrauIdleRight.png" alt="Player Sprite">
+            <img class="enemy-img" src="imagens/pombo.gif" alt="Enemy Sprite">
+        </div>
+        <div id="dynamicText">INIMIGO ENCONTRADO</div>
+        <div id="playerHealth">50</div>
+        <div id="enemyHealth"></div>
+        <div id="playerStats" class="playerStats">
+            <p id="playerLevel">Nível: 1</p>
+            <p id="playerXP">XP: 0 / 100</p>
+            <!-- Outras estatísticas do jogador, se necessário -->
+        </div>
+        <div id="attackButtons">
+            <button id="attack1">LATIDO</button>
+            <button id="attack2">CAVAR</button>
+            <button id="attack3">DEFESA HUMANA</button>
+        </div>
+    </div>
+    <canvas id="gameCanvas" class="game-canvas" width="1300" height="800"></canvas>
+    <script src="game.js"></script>
+    <script src="textos.js"></script>
+    <script>
+        // Desabilitar o comportamento de rolagem automática com setas do teclado
+        window.addEventListener('keydown', function(e) {
+        // Verificar se a tecla pressionada é uma seta para cima ou para baixo
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            // Impedir o comportamento padrão da rolagem
+            e.preventDefault();
+        }
+        });
+    </script>
+</body>
+</html>
+

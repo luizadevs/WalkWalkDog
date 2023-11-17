@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@600&display=swap');
+
+
+body {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    overflow: none;
+    background: url('imagens/fundo0.png') no-repeat center center fixed;
+    background-size: cover;
+    image-rendering: pixelated;
+}
+
+#attackButtons button:hover + #dynamicText,
+#dynamicText:hover {
+    display: block;
+}
+
+#dynamicText {
+    margin-top: 10px;
+    display: block;
+    position: absolute;
+    top: 35%;
+    left: 4%;
+    color: white;
+    padding: 10px;
+    font-family: 'Playpen Sans', cursive;
+}
+
+ #battleWindow {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 90%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: url('imagens/fundobatalha0.png');
+    background-size: cover;
+    border: 2px solid #000;
+    z-index: 1;
+}
+
+#characterSprites {
+    display: flex;
+    padding-left: 450px;
+    padding-right: 450px;
+    justify-content: space-between;
+    align-items: flex-end; /* Alinhe os itens pela parte inferior */
+    margin-bottom: 46px; /*lugar dos ataques*/
+}
+
+.character-img {
+    width: 100px;
+    height: 100px;
+    image-rendering: pixelated; 
+}
+
+.enemy-img {
+    width: 40px;
+    height: 40px;
+    image-rendering: pixelated; 
+    margin-top: 60px; 
+}
+
+#attackButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#attackButtons button {
+    flex: 1;
+    margin-right: 10px; 
+    padding: 25px;
+    font-size: 20px;
+    background: gray;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-family: 'Playpen Sans', cursive;
+}
+
+
+/* Adicione estilos para a classe "personagem" */
+.personagem {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; 
+    image-rendering: pixelated;
+}
+
+#enemyHealth{
+    position: absolute;
+    top: 8%;
+    left: 58%;
+    font-family: 'Playpen Sans', cursive;
+    color: green;
+}
+
+#playerHealth{
+    position: absolute;
+    top: 0%;
+    left: 40%;
+    font-family: 'Playpen Sans', cursive;
+    color: green;
+}
+
+.playerStats{
+    top: 0;
+    color: white;
+    position: absolute;
+    left: 10px;
+    font-family: 'Playpen Sans', cursive;
+}

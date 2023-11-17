@@ -39,26 +39,19 @@ let inBattle = false;
 // Declaração da variável enemy
 const enemy = {
     x: 700,
-    y: 500,
-    width: 50,
-    height: 50,
-    imgPath: 'imagens/pombo.gif'
+    y: 200,
+    width: 200,
+    height: 200,
+    imgPath: 'imagens/sinukeroIdle.png'
 };
 
-const enemy2 = {
-    x: 900,
-    y: 30,
-    width: 50,
-    height: 50,
-    imgPath: 'imagens/pombo.gif'
-};
 
 const moto = {
     x: 1000,
     y: 100,
     width: 200,
     height: 200,
-    imgPath: 'imagens/moto.png',
+    imgPath: 'imagens/guitarristaAndando.gif',
     speed: 3,
     direction: 1
 };
@@ -77,8 +70,7 @@ function draw() {
     ctx.fillStyle = "rgba(255, 0, 0, 0)";
     //ctx.fillRect(player.x, player.y, player.width, player.height);
 
-    ctx.drawImage(enemyImage, enemy.x, enemy.y, enemy.width, enemy.height);
-    ctx.drawImage(enemyImage, enemy2.x, enemy2.y, enemy2.width, enemy2.height);
+    ctx.drawImage(enemyImage, enemy.x, enemy.y, enemy.width, enemy.height)
 
     const battleWindow = document.getElementById("battleWindow");
     battleWindow.style.display = inBattle ? "block" : "none";
@@ -114,7 +106,7 @@ function draw() {
 }
 
 let faseAtual = 1;
-let playerHealth = 1000;
+let playerHealth = 100;
 let enemyHealth = 50;
 
 let playerDamage = 10;
@@ -169,20 +161,22 @@ function update() {
         console.log(atualizacaoHpFeita);
 
         if (faseAtual === 1 && !atualizacaoHpFeita) {
-            inimigo.style.marginTop = '60px';
-            inimigoHp.style.top = '8%';
-            inimigoHp.style.left = '58%';
-            enemyHealth = 50;
+            inimigo.style.width = '100px';
+            inimigo.style.height = '100px';
+            inimigo.style.marginTop = '5px';
+            inimigoHp.style.top = '2%';
+            inimigoHp.style.left = '55%';
+            enemyHealth = 80;
             atualizaHp();
 
             atualizacaoHpFeita = true;
         } else if (faseAtual === 2 && !atualizacaoHpFeita) {
             motobatalha = true;
-            inimigo.src = 'imagens/moto.png';
+            inimigo.src = 'imagens/guitarristaIdle.png';
             inimigo.style.width = '100px';
-            inimigo.style.height = '80px';
+            inimigo.style.height = '100px';
             inimigo.style.marginTop = '5px';
-            inimigoHp.style.top = '4%';
+            inimigoHp.style.top = '2%';
             inimigoHp.style.left = '55%';
             enemyHealth = 80;
             atualizaHp();
@@ -231,10 +225,17 @@ function update() {
                 
                 if (faseAtual === 1) {
                     // Muda temporariamente a imagem após 300 milissegundos
-                    inimigo.src = 'imagens/pombob.gif';
+                    inimigo.src = 'imagens/sinukeroBrabo.gif';
                     // Após mais 300 milissegundos, volta à imagem normal
                     setTimeout(function () {
-                        inimigo.src = 'imagens/pombo.gif';
+                        inimigo.src = 'imagens/sinukeroIdle.png';
+                    }, 1000);
+                }if (faseAtual === 2) {
+                    // Muda temporariamente a imagem após 300 milissegundos
+                    inimigo.src = 'imagens/guitarristaBrabo.gif';
+                    // Após mais 300 milissegundos, volta à imagem normal
+                    setTimeout(function () {
+                        inimigo.src = 'imagens/guitarristaIdle.png'; 
                     }, 1000);
                 }
 
@@ -263,11 +264,7 @@ function update() {
             (player.x < enemy.x + enemy.width &&
                 player.x + player.width > enemy.x &&
                 player.y < enemy.y + enemy.height &&
-                player.y + player.height > enemy.y) ||
-            (player.x < enemy2.x + enemy2.width &&
-                player.x + player.width > enemy2.x &&
-                player.y < enemy2.y + enemy2.height &&
-                player.y + player.height > enemy2.y)
+                player.y + player.height > enemy.y)
         ) {
             inBattle = true;
         } else {
@@ -346,20 +343,19 @@ function handleAttack(attackName) {
                         playerImage.src = 'imagens/LuEBrauIdleRight.png';
                     }, 1000);
                 }
-            } else if (attackName == 'DEFESA HUMANA') {
-                playerDamage = Math.max(0, enemyHealth >= 0 ? 0 : -enemyHealth);
+            } else if (attackName == 'UIVO SÔNICO') {
+                playerDamage = Math.max(0, enemyHealth >= 0 ? 30 : -enemyHealth);
                 enemyHealth -= playerDamage;
                 if (playerImage) {
                     // Ganha XP ao atacar
                     player.xp += 10;
                     // Muda temporariamente a imagem após 300 milissegundos
-                    playerImage.src = 'imagens/LuEBrauDefense.gif';
+                    playerImage.src = 'imagens/LuEBrauHowl.gif';
 
                     // Após mais 300 milissegundos, volta à imagem normal
                     setTimeout(function () {
-                        playerImage.src = 'imagens/LuEBrauDefenseIdle.png';
-                        defesa = true;
-                    }, 1200);
+                        playerImage.src = 'imagens/LuEBrauIdleRight.png';
+                    }, 1000);
                 }
 
                 dynamicText.innerText = `Causou ${playerDamage} de dano no inimigo!`;
@@ -429,9 +425,6 @@ function updateLevel() {
             // Mantém as posições do inimigo
             enemy.x = -1000;
             enemy.y = -1000;
-
-            enemy2.x = -1000;
-            enemy2.y = -1000;
         }
     } else if (faseAtual === 2) {
         // Limita as coordenadas do jogador na tela da Fase 2
@@ -446,9 +439,6 @@ function updateLevel() {
             // Mantém as posições do inimigo
             enemy.x = 700;
             enemy.y = 500;
-
-            enemy2.x = 900;
-            enemy2.y = 40;
         }
     }
 }
@@ -512,12 +502,6 @@ function endBattle() {
         player.y + player.height > enemy.y){
             enemy.x = -1000;
             enemy.y = -1000;
-    }else if (player.x < enemy2.x + enemy2.width &&
-            player.x + player.width > enemy2.x &&
-            player.y < enemy2.y + enemy2.height &&
-            player.y + player.height > enemy2.y){
-            enemy2.x = -1000;
-            enemy2.y = -1000; 
     }
 
     if(motobatalha){
@@ -545,9 +529,6 @@ function GameOver() {
 
     enemy.x = 700;
     enemy.y = 500;
-
-    enemy2.x = 900;
-    enemy2.y = 40;
 }
 
 
